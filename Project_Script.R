@@ -14,7 +14,7 @@ library(rgdal)
 
 #########################################################################################################
 
-setwd("F:/R_Project/") 
+setwd("D:/R_Project/") # Dont Forget to set you Working Directory!
 BRCK <- "S2Brick_1.tif" # Brick of Remote Sensing Imagery
 SHP <- "ROI.shp" # Shape of the Region of Interest
 
@@ -98,7 +98,7 @@ TotalSamps <- (length(uniqueClass)*numsamps)
 WrongSeq <- seq(1,TotalSamps,1)
 
 # Create a vector with the Fractions of randomly reassigned Data
-WrongData <- c(0.025,0.05,0.075,0.1,0.125,0.15,0.175,0.2,0.225,0.25,0.275,0.3,0.325,0.35,0.375,0.4,0.425,0.45,0.475,0.5)
+WrongData <- seq(0.025,0.5,0.025)
 
 # Randomly select the training points, whose class designations are going to be replaced
 WrongSamp <- list()
@@ -145,11 +145,18 @@ library(lattice)
 
 Ergebnis <- list()
 Ergebnis.list <- list()
-nRep <- 3 # should be at least 3, but more repetitions really prolong the running Time of the Code  
+nRep <- 1    # Number of Repetitions of the Classification
 mod <- "mlc" # Classification scheme used. Can be either "mlc" (Maximum Likelihood) or "rf" (Random Forest).
              # RF classifaction slows down the Code cosiderably.
 
 # Run the Classification nRep times for each fraction of faulty Data
+
+######################################################################################
+#                                                                                    #
+#! Runtime of the Classification with the Presets (and supplied Data) ca. 1:30 Mins !#
+#                                                                                    #
+######################################################################################                                                                                    
+
 for(q in 1:nRep){
 for(i in 1:length(ReasData)){
 sc <- superClass(S2Brick,trainData = ReasData[[i]],valData = Valid,responseCol = ColNam, model = mod)
@@ -201,9 +208,9 @@ p <- ggplot(data = plot_df, aes(x = V4, y = V1)) +
                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
                label.x = "right", label.y = "top",
                parse = TRUE) +         
-  geom_point() + labs(title = "Response of the Overall Classification Accuracy to increasing fractions of Wrong Data using the superClass function", subtitle = glue("Used Classification: {mod}"),
-                      caption = "Based on CLC 2018 with 12 Classes and 60m Resolution Sentinel-2 images") +
-  xlab("Fraction of Wrong Data") + ylab("Overall Accuracy") + ylim(0.2,0.7)
+  geom_point() + labs(title = "Response of the Overall Classification Accuracy to increasing fractions of Wrong Data using the superClass function", subtitle = "Based on CLC 2018 with 12 Classes and 60m Resolution Sentinel-2 images",
+                      caption = glue("Used Classification: {mod}")) +
+  xlab("Fraction of Wrong Data") + ylab("Overall Accuracy") + ylim(min(plot_df$V1)-0.02,max(plot_df$V1)+0.02)
 p
 
 # It should show a strong linearity between the fraction of wrong Data and
