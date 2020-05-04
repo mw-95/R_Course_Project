@@ -134,6 +134,8 @@ WrongData <- append(WrongData,0,0)
 rm(WrongSeq)
 rm(TotalSamps)
 rm(WrongSamp)
+rm(tmp)
+rm(tmp3)
 ######################################################################################
 
 # Load RStoolbox for the next step
