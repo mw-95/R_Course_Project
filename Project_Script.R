@@ -32,20 +32,6 @@ setwd(wd)
 BRCK <- "Test_Data.tif" # Brick of Remote Sensing Imagery
 S2Brick <- brick(BRCK)
 
-#Setup Part, not needed if you just want to run the Code with the provided Data
-# For Classification, we need S2 Imagery
-#files.list <- list.files("./",pattern="60m.tif")
-
-#rasterlist <- list()
-
-#for (i in 1:length(files.list)){
-#  rasterlist[[i]] <- raster(files.list[i]) 
-#}
-
-#S2Brick <- brick(rasterlist)
-#writeRaster(S2Brick,"S2Brick_1.tif")
-#rm(rasterlist)
-
 ########################################################
 
 # Sampling Random Points
@@ -206,7 +192,7 @@ plot_df <- bind_rows(df.list)
 ######################################################################################
 # Plot the Results using the ggplot2
 
-library(ggpmisc) # Used to display R² and the Regression Formula
+library(ggpmisc) # Used to display RÂ² and the Regression Formula
 library(glue) # Used for the Subtitle
 
 my.formula <- y ~ x
