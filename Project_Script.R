@@ -136,6 +136,7 @@ rm(TotalSamps)
 rm(WrongSamp)
 rm(tmp)
 rm(tmp3)
+
 ######################################################################################
 
 # Load RStoolbox for the next step
@@ -145,7 +146,7 @@ library(lattice)
 
 Ergebnis <- list()
 Ergebnis.list <- list()
-nRep <- 3    # Number of Repetitions of the Classification
+nRep <- 1    # Number of Repetitions of the Classification
 mod <- "mlc" # Classification scheme used. Can be either "mlc" (Maximum Likelihood) or "rf" (Random Forest).
              # RF classifaction slows down the Code cosiderably.
 
@@ -185,6 +186,7 @@ for(g in 1:nRep){
 rm(g)
 rm(q)
 rm(i)
+rm(TEMP)
 
 # Append the corresponding Data fractions to the Dataframe
 for (i in 1:nRep){
@@ -198,7 +200,7 @@ plot_df <- bind_rows(df.list)
 ######################################################################################
 # Plot the Results using the ggplot2
 
-library(ggpmisc) # Used to display R² and the Regression Formula
+library(ggpmisc) # Used to display RÂ² and the Regression Formula
 library(glue) # Used for the Subtitle
 
 my.formula <- y ~ x
