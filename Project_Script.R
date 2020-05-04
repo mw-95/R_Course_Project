@@ -1,7 +1,11 @@
-# This Script creates Training Point Samples from provided Polygons
-# and randomly reassignes a fraction of them to a wrong class.
-# This is done to test the Sensitivity of the supervised Classification Algorithms
-# provided by the function "superClass()" in RStoolbox.
+###########################################################################
+#                                                                         #
+#  This Script creates Training point samples from provided polygons      #
+#  and randomly reassignes a fraction of them to a wrong class.           #
+#  This is done to test the sensitivity of the supervised Classification  #
+#  Algorithms provided by the function "superClass()" in RStoolbox.       #
+#                                                                         #
+###########################################################################
 
 # Originally written by Marius Witt in January 2020, latest Version: March 2020
 # Code is good to go!
