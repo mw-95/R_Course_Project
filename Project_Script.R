@@ -13,7 +13,6 @@
 library(rstudioapi)
 library(dplyr)
 library(sp)
-library(sf)
 library(raster)
 library(rgdal)
 
@@ -201,7 +200,7 @@ plot_df <- bind_rows(df.list)
 # Plot the Results using the ggplot2
 
 library(ggpmisc) # Used to display RÂ² and the Regression Formula
-library(glue) # Used for the Subtitle
+library(glue) # Used for the Subtitle and filename
 
 my.formula <- y ~ x
 p <- ggplot(data = plot_df, aes(x = V4, y = V1)) +
@@ -217,3 +216,7 @@ p
 
 # It should show a strong linearity between the fraction of wrong Data and
 # the Overall Accuracy of the Classification Output.
+
+# Save the output as PDF file.
+file_name <- glue("Output_{mod}_{nRep}.pdf")
+ggsave(file_name, width = 11, height = 6, dpi = 100)
